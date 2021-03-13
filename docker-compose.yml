@@ -12,5 +12,12 @@ services:
        - ./datafiles:/var/lib/mysql
        - ./init:/docker-entrypoint-initdb.d
      restart: always
+
+   serverapi:
+     depends_on:
+       - db
+     image: maxide201/rtu_it_lab_lvl1:api
+     build:
+      context: .
      ports:
-      - "1234:3306"
+       - "8080:80"
