@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using serverAPI.Models;
+using serverAPI.Database;
 
 namespace serverAPI.Controllers
 {
@@ -12,10 +13,76 @@ namespace serverAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        [HttpGet]
-        public JsonResult GetUsers()
+        IUserRepository db;
+
+        public UsersController(IUserRepository db)
         {
-            return new JsonResult(new User() {Id = 1, Purchases = new List<Purchase>() { new Purchase() { Id = 1, UserId = 1, Cost = 100, Name = "aaa", PurchaseDate = DateTime.Now} } });
+            this.db = db;
+        }
+
+        [HttpGet("{id}")]
+        public JsonResult GetUser(uint id)
+        {
+            User user = db.Get(id);
+
+            if (user == null)
+                return new JsonResult(NotFound());
+
+            return new JsonResult(Ok(user));
+
+        }
+  
+        [HttpPost]
+        public JsonResult PostUser(User user)
+        {
+            if (isUserInvalid(user))
+                return new JsonResult(BadRequest());
+
+            user = db.Add(user);
+
+            return new JsonResult(Ok(user));
+        }
+
+        [HttpPut]
+        public JsonResult PutUser(User user)
+        {
+            if (isUserInvalid(user, idTestFlag: true))
+                return new JsonResult(BadRequest());
+            if (db.Get(user.Id) == null)
+                return new JsonResult(NotFound());
+
+            user = db.Update(user);
+            return new JsonResult(Ok(user));
+        }
+
+        [HttpDelete("{id}")]
+        public JsonResult DeleteUser(uint id)
+        {
+            User user = db.Get(id);
+
+            if (user == null)
+                return new JsonResult(NotFound());
+
+            db.Delete(id);
+            return new JsonResult(Ok(user));
+        }
+
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public bool isUserInvalid(User user, bool idTestFlag = false)
+        {
+            if (user == null || user.Purchases == null)
+                return true;
+            if (idTestFlag && user.Id == 0)
+                return true;
+            foreach (var purchase in user.Purchases)
+            {
+                if (purchase == null)
+                    return true;
+                if (purchase.Name == null ||
+                    purchase.PurchaseDate == System.DateTime.MinValue)
+                    return true;
+            }
+            return false;
         }
     }
 }

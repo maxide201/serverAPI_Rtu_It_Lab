@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using serverAPI.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,16 @@ namespace serverAPI
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = Configuration.GetConnectionString("Database");
+            services.AddTransient<IUserRepository, UserRepository>(provider => new UserRepository(connectionString));
             services.AddControllers();
         }
 
