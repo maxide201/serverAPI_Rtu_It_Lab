@@ -7,6 +7,6 @@ namespace serverAPI.Models
     {
         [Key]
         public uint Id { get; set; }
-        public IList<Purchase> Purchases { get; set; }
+        public string Name { get; set; }
     }
 }
