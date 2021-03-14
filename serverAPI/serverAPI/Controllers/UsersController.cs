@@ -129,7 +129,7 @@ namespace serverAPI.Controllers
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
-        public bool isUserInvalid(User user, bool idTestFlag = false)
+        public virtual bool isUserInvalid(User user, bool idTestFlag = false)
         {
             if (user == null || user.Purchases == null)
                 return true;
