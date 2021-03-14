@@ -10,6 +10,7 @@ namespace serverAPI.Models
         uint Id { get; set; }
         uint ShopId { get; set; }
         uint UserId { get; set; }
+        DateTime PurchaseDate { get; set; }
         IList<Purchase> Purchases { get; set; }
     }
 }
