@@ -74,7 +74,7 @@ namespace serverAPI.Database
 
                 var PurchasesInDb = db.Query<Purchase>(sqlQueryGetPurchases, new { userId = user.Id }).ToList();
 
-                //Проходимся по покупкам, которые есть на текущий момент есть в бд
+                //Проходимся по покупкам, которые есть на текущий момент в бд
                 foreach (var purchase in PurchasesInDb)
                 {
                     //match будет не null, если пользователь не удалял покупку из своего списка
