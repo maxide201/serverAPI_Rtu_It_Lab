@@ -66,11 +66,11 @@ namespace UserApp.Controllers
         public JsonResult PostUser(User user)
         {
             if (!isUserValid(user))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             user = _db.Add(user);
 
-            return new JsonResult(Ok(user));
+            return _Response.Ok(user);
         }
 
         /// <summary>
@@ -94,13 +94,13 @@ namespace UserApp.Controllers
         public JsonResult DeleteUser(User user)
         {
             if (!isUserValid(user, idTestFlag:true))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             if (!_db.isUserPasswordRight(user))
-                return new JsonResult(StatusCode(403));
+                return _Response.Forbid();
 
             _db.Delete(user.Id);
-            return new JsonResult(Ok(user));
+            return _Response.Ok(user);
         }
 
 

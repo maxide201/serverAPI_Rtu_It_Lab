@@ -39,7 +39,6 @@ namespace UserApp.Database
                 var sqlQueryDeleteUser = "DELETE FROM Users WHERE Id = @id";
                 var sqlQueryCheckIdForDelete = "SELECT Id FROM Checks where UserId = @id and NOT EXISTS(SELECT * FROM Shops WHERE Id IN(select ShopId from Checks where UserId = @id))";
                 var sqlQueryDeleteChecks = "DELETE FROM Checks WHERE Id IN @ids";
-                //CREATE TEMPORARY TABLE t AS select * from Checks where ShopId=1 and NOT EXISTS (SELECT * FROM Users WHERE Id IN ( select UserId from Checks where ShopId=1)); select * from t where Id In (SELECT Id FROM t); DROP TABLE t;
 
                 db.Execute(sqlQueryDeleteUser, new { id });
                 List<uint> CheckIds = db.Query<uint>(sqlQueryCheckIdForDelete, new { id }).ToList();

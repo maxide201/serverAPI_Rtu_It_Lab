@@ -45,5 +45,31 @@ namespace UserApp.Tests
 
             Assert.Equal(expected.StatusCode, result.StatusCode);
         }
+
+        [Fact]
+        public void postUserReturnCode400()
+        {
+            var mock = new Mock<IUserRepository>();
+            UsersController controller = new UsersController(mock.Object);
+            User user = new User();
+
+            var result = controller.PostUser(user);
+            var expected = controller.StatusCode(400);
+
+            Assert.Equal(expected.StatusCode, result.StatusCode);
+        }
+
+        [Fact]
+        public void deleteUserReturnCode400()
+        {
+            var mock = new Mock<IUserRepository>();
+            UsersController controller = new UsersController(mock.Object);
+            User user = new User();
+
+            var result = controller.DeleteUser(user);
+            var expected = controller.StatusCode(400);
+
+            Assert.Equal(expected.StatusCode, result.StatusCode);
+        }
     }
 }
