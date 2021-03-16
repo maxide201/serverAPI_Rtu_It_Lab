@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserApp", "UserApp\UserApp.csproj", "{34059DAC-9BA1-4142-BEF6-CC2AE4C5EBFF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerModels", "..\ServerModels\ServerModels\ServerModels.csproj", "{7285C987-70F6-4796-93EE-82137B13F71D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserApp", "UserApp\UserApp.csproj", "{34059DAC-9BA1-4142-BEF6-CC2AE4C5EBFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{34059DAC-9BA1-4142-BEF6-CC2AE4C5EBFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34059DAC-9BA1-4142-BEF6-CC2AE4C5EBFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34059DAC-9BA1-4142-BEF6-CC2AE4C5EBFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7285C987-70F6-4796-93EE-82137B13F71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7285C987-70F6-4796-93EE-82137B13F71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7285C987-70F6-4796-93EE-82137B13F71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7285C987-70F6-4796-93EE-82137B13F71D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

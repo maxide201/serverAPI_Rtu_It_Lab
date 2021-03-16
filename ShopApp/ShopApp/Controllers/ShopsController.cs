@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ShopApp.Database;
-using ServerModels;
+using ShopApp.Models;
 using System.Collections.Generic;
 
 namespace ShopApp.Controllers

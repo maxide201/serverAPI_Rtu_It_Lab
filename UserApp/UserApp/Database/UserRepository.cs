@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Dapper;
-using ServerModels;
+using UserApp.Models;
 using System.Data;
 using MySql.Data.MySqlClient;
 

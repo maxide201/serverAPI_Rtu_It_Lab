@@ -14,10 +14,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="ServerModels">
-      <HintPath>..\..\ServerModels\ServerModels\bin\Debug\netcoreapp3.1\ServerModels.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

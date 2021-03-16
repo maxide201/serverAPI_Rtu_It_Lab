@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ServerModels
+namespace ShopApp.Models
 {
     public class CheckDTO
     {

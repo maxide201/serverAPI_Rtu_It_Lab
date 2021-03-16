@@ -3,7 +3,7 @@ using System.Data;
 using System.Linq;
 using Dapper;
 using MySql.Data.MySqlClient;
-using ServerModels;
+using ShopApp.Models;
 
 namespace ShopApp.Database
 {

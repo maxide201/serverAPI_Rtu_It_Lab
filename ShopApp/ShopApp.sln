@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "serverAPI.Tests", "serverAPI.Tests\serverAPI.Tests.csproj", "{711B8485-EBD5-4326-919E-A6BB6C4000E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerModels", "..\ServerModels\ServerModels\ServerModels.csproj", "{DBC81399-A82B-4E08-AFE9-826285DBEECF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopApp", "ShopApp\ShopApp.csproj", "{2FE46C97-A551-48E9-9C0A-CAE24C3B4988}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{711B8485-EBD5-4326-919E-A6BB6C4000E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{711B8485-EBD5-4326-919E-A6BB6C4000E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{711B8485-EBD5-4326-919E-A6BB6C4000E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBC81399-A82B-4E08-AFE9-826285DBEECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBC81399-A82B-4E08-AFE9-826285DBEECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBC81399-A82B-4E08-AFE9-826285DBEECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBC81399-A82B-4E08-AFE9-826285DBEECF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FE46C97-A551-48E9-9C0A-CAE24C3B4988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FE46C97-A551-48E9-9C0A-CAE24C3B4988}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FE46C97-A551-48E9-9C0A-CAE24C3B4988}.Release|Any CPU.ActiveCfg = Release|Any CPU

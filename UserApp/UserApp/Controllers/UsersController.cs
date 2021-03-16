@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ServerModels;
+using UserApp.Models;
 using UserApp.Database;
 using System.Collections.Generic;
 

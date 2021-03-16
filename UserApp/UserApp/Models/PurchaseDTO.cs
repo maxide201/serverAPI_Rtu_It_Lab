@@ -1,5 +1,5 @@
 ﻿
-namespace ServerModels
+namespace UserApp.Models
 {
     public class PurchaseDTO
     {

@@ -1,4 +1,4 @@
-﻿namespace ServerModels
+﻿namespace ShopApp.Models
 {
     public class ShopAdminProductRequest
     {
