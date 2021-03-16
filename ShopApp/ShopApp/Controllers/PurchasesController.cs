@@ -48,16 +48,16 @@ namespace ShopApp.Controllers
         public JsonResult MakePurchase(PurchaseRequest request)
         {
             if (!isPurchaseRequestRight(request))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             if (!_db.isUserAndShopExists(request))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             CheckDTO check = _db.MakePurchase(request);
             if (check == null)
-                return new JsonResult(StatusCode(409));
+                return _Response.Conflict();
 
-            return new JsonResult(Ok(check));
+            return _Response.Ok(check);
         }
 
         /// <summary>
@@ -81,14 +81,14 @@ namespace ShopApp.Controllers
         {
 
             if (!isShopRequestValid(request))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             if (!_db.isShopPasswordRight(request))
-                return new JsonResult(StatusCode(403));
+                return _Response.Forbid();
 
-            List<CheckDTO> purchases = _db.GetChecks(request.ShopId);
+            List <CheckDTO> purchases = _db.GetChecks(request.ShopId);
 
-            return new JsonResult(Ok(purchases));
+            return _Response.Ok(purchases);
 
         }
 

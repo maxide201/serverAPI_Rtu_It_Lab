@@ -25,7 +25,7 @@ namespace ShopApp.Controllers
         {
             List<ProductDTO> products = _db.GetProducts(shopId);
 
-            return new JsonResult(Ok(products));
+            return _Response.Ok(products);
         }
 
         /// <summary>
@@ -54,15 +54,15 @@ namespace ShopApp.Controllers
         public JsonResult PostProduct(ShopAdminProductRequest request)
         {
             if (!isRequestValid(request))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             if (!_db.isPasswordRight(request))
-                return new JsonResult(StatusCode(403));
+                return _Response.Forbid();
 
             Product product = request.Product;
             product = _db.AddProduct(product);
 
-            return new JsonResult(Ok(product));
+            return _Response.Ok(product);
         }
 
         /// <summary>
@@ -92,18 +92,18 @@ namespace ShopApp.Controllers
         public JsonResult UpdateProduct(ShopAdminProductRequest request)
         {
             if (!isRequestValid(request))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             if (!_db.isPasswordRight(request))
-                return new JsonResult(StatusCode(403));
+                return _Response.Forbid();
 
             Product product = _db.Get(request.Product.Id);
             if (product == null)
-                return new JsonResult(NotFound());
+                return _Response.NotFound();
 
             product = _db.UpdateProduct(request.Product);
 
-            return new JsonResult(Ok(product));
+            return _Response.Ok(product);
         }
 
         /// <summary>
@@ -130,21 +130,21 @@ namespace ShopApp.Controllers
         public JsonResult DeleteProduct(ShopAdminProductRequest request)
         {
             if (!isRequestValid(request, DeleteFlag:true))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             if (!_db.isPasswordRight(request))
-                return new JsonResult(StatusCode(403));
+                return _Response.Forbid();
 
             Product product = _db.Get(request.Product.Id);
             if (product == null)
-                return new JsonResult(NotFound());
+                return _Response.NotFound();
 
             if (product.ShopId != request.Product.ShopId)
-                return new JsonResult(StatusCode(403));
+                return _Response.Forbid();
 
             _db.DeleteProduct(product.Id);
 
-            return new JsonResult(Ok(product));
+            return _Response.Ok(product);
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]

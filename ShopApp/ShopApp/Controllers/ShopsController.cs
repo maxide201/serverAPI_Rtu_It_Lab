@@ -28,7 +28,7 @@ namespace ShopApp.Controllers
         {
             List<ShopDTO> shops = _db.Get();
 
-            return new JsonResult(Ok(shops));
+            return _Response.Ok(shops);
         }
 
         /// <summary>
@@ -56,15 +56,15 @@ namespace ShopApp.Controllers
         public JsonResult PostShop(SuperAdminRequest request)
         {
             if (!isSuperAdmin(request.RootPassword))
-                return new JsonResult(StatusCode(403));
+                return _Response.Forbid();
 
             Shop shop = request.Shop;
             if (!isShopValid(shop))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             shop = _db.Add(shop);
 
-            return new JsonResult(Ok(shop));
+            return _Response.Ok(shop);
         }
 
         /// <summary>
@@ -89,16 +89,16 @@ namespace ShopApp.Controllers
         public JsonResult DeleteShop(SuperAdminRequest request)
         {
             if (!isSuperAdmin(request.RootPassword))
-                return new JsonResult(Forbid());
+                return _Response.Forbid();
 
             uint id = request.Shop.Id;
             Shop shop = _db.Get(id);
 
             if (shop == null)
-                return new JsonResult(NotFound());
+                return _Response.NotFound();
 
             _db.Delete(id);
-            return new JsonResult(Ok(shop));
+            return _Response.Ok(shop);
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]

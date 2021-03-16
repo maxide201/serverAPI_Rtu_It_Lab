@@ -37,14 +37,14 @@ namespace UserApp.Controllers
         public JsonResult GetPurchases(User user)
         {
             if (!isUserValid(user))
-                return new JsonResult(BadRequest());
+                return _Response.BadRequest();
 
             if (!_db.isUserPasswordRight(user))
-                return new JsonResult(StatusCode(403));
+                return _Response.Forbid();
 
             List<PurchaseDTO> purchases = _db.GetPurchases(user.Id);
 
-            return new JsonResult(Ok(purchases));
+            return _Response.Ok(purchases);
 
         }
         /// <summary>
