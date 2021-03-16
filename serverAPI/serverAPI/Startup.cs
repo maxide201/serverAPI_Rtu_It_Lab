@@ -34,7 +34,7 @@ namespace serverAPI
                 {
                     Version = "v1",
                     Title = "serverAPI API",
-                    Description = "Backend API for level 1 task\nfrom RTU IT LAB",
+                    Description = "Backend API for level 2 task from RTU IT LAB",
                     Contact = new OpenApiContact
                     {
                         Name = "Maxim Soluyanov",

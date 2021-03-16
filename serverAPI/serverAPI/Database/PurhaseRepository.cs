@@ -12,7 +12,7 @@ namespace serverAPI.Database
 {
     public interface IPurchaseRepository
     {
-        bool isUserAndShopExhist(PurchaseRequest request);
+        bool isUserAndShopExists(PurchaseRequest request);
         public CheckDTO MakePurchase(PurchaseRequest request);
         bool isShopPasswordRight(ShopAdminRequest request);
         List<CheckDTO> GetChecks(uint ShopId);
@@ -22,7 +22,7 @@ namespace serverAPI.Database
         public PurchaseRepository(string conn) : base(conn)
         {
         }
-        public bool isUserAndShopExhist(PurchaseRequest request)
+        public bool isUserAndShopExists(PurchaseRequest request)
         {
             using (IDbConnection db = new MySqlConnection(connectionString))
             {

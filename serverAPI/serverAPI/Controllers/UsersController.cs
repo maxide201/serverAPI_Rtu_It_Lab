@@ -18,10 +18,22 @@ namespace serverAPI.Controllers
         }
 
         /// <summary>
-        /// Return user by id.
+        /// Return user's purchases.
         /// </summary>
-        /// <response code="200">Returns user</response>
-        /// <response code="404">If the user doesn't exist</response>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     GET /api/Users
+        ///     {
+        ///        "id": 1,
+        ///        "name: "Maxim",
+        ///        "password": "secret"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Returns purchases</response>
+        /// <response code="400">If request is invalid</response>
+        /// <response code="403">If password incorrect or user doesen't exist</response>
         [HttpGet]
         public JsonResult GetPurchases(User user)
         {
@@ -37,26 +49,20 @@ namespace serverAPI.Controllers
 
         }
         /// <summary>
-        /// Creates a new user.
+        /// Add new user.
         /// </summary>
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /Users
+        ///     POST /api/Users
         ///     {
-        ///        "purchases": [
-        ///             {
-        ///                 "name": "apple",
-        ///                 "purchaseDate": "2000-01-01T01:01:01",
-        ///                 "cost: 1000
-        ///             }
-        ///         ]
+        ///        "name: "Maxim",
+        ///        "password": "secret"
         ///     }
         ///
         /// </remarks>
-        /// <returns>A newly created user</returns>
-        /// <response code="200">Returns the newly created user</response>
-        /// <response code="400">If the user is null or invalid</response>      
+        /// <response code="200">Return user</response>
+        /// <response code="400">If request is invalid</response>
         [HttpPost]
         public JsonResult PostUser(User user)
         {
@@ -69,10 +75,22 @@ namespace serverAPI.Controllers
         }
 
         /// <summary>
-        /// Delete user by id.
+        /// Delete user.
         /// </summary>
-        /// <response code="200">Returns deleted user</response>
-        /// <response code="404">If the user doesn't exist</response>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     Delete /api/Users
+        ///     {
+        ///        "id": 1,
+        ///        "name: "Maxim",
+        ///        "password": "secret"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Return deleted user</response>
+        /// <response code="400">If request is invalid</response>
+        /// <response code="403">If password incorrect or user doesen't exist</response>
         [HttpDelete]
         public JsonResult DeleteUser(User user)
         {

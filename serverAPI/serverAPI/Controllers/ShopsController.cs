@@ -24,10 +24,9 @@ namespace serverAPI.Controllers
         }
 
         /// <summary>
-        /// Return user by id.
+        /// Return all shops.
         /// </summary>
-        /// <response code="200">Returns user</response>
-        /// <response code="404">If the user doesn't exist</response>
+        /// <response code="200">Return list of shops</response>
         [HttpGet]
         public JsonResult GetShops()
         {
@@ -37,26 +36,26 @@ namespace serverAPI.Controllers
         }
 
         /// <summary>
-        /// Creates a new user.
+        /// Post new shop (for SuperAdmin).
         /// </summary>
         /// <remarks>
         /// Sample request:
         ///
-        ///     POST /Users
+        ///     Post /api/Shops
         ///     {
-        ///        "purchases": [
-        ///             {
-        ///                 "name": "apple",
-        ///                 "purchaseDate": "2000-01-01T01:01:01",
-        ///                 "cost: 1000
-        ///             }
-        ///         ]
+        ///         "rootPassword": "bigsecret",
+        ///         "shop": {
+        ///             "Name": "shop1",
+        ///             "phoneNumber": "88005553535",
+        ///             "Address": "Moscow",
+        ///             "Password": "1"
+        ///         }
         ///     }
         ///
         /// </remarks>
-        /// <returns>A newly created user</returns>
-        /// <response code="200">Returns the newly created user</response>
-        /// <response code="400">If the user is null or invalid</response>      
+        /// <response code="200">Return shop</response>
+        /// <response code="400">If request is invalid</response>
+        /// <response code="403">If root password incorrect</response>  
         [HttpPost]
         public JsonResult PostShop(SuperAdminRequest request)
         {
@@ -73,10 +72,23 @@ namespace serverAPI.Controllers
         }
 
         /// <summary>
-        /// Delete user by id.
+        /// Delete shop (for SuperAdmin).
         /// </summary>
-        /// <response code="200">Returns deleted user</response>
-        /// <response code="404">If the user doesn't exist</response>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     Post /api/Shops
+        ///     {
+        ///         "rootPassword": "bigsecret",
+        ///         "shop": {
+        ///             "id":1
+        ///         }
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Return deleted shop</response>
+        /// <response code="400">If request is invalid</response>
+        /// <response code="403">If root password incorrect</response>  
         [HttpDelete]
         public JsonResult DeleteShop(SuperAdminRequest request)
         {
@@ -93,6 +105,7 @@ namespace serverAPI.Controllers
             return new JsonResult(Ok(shop));
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public virtual bool isShopValid(Shop shop)
         {
             if (shop == null ||
@@ -105,6 +118,7 @@ namespace serverAPI.Controllers
             return true;
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         private bool isSuperAdmin(string password)
         {
             return password == _configuration.GetValue<string>("RootPassword");
