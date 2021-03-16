@@ -41,6 +41,7 @@ namespace ShopApp.Controllers
         ///             "shopId":1,
         ///             "Name":"water", 
         ///             "Category":"food", 
+        ///             "Description":"cool water", 
         ///             "Cost":10,
         ///             "Count":10
         ///         }
@@ -79,6 +80,7 @@ namespace ShopApp.Controllers
         ///             "shopId":1,
         ///             "Name":"water", 
         ///             "Category":"food", 
+        ///             "Description":"cool water",
         ///             "Cost":10,
         ///             "Count":10
         ///         }
@@ -157,8 +159,10 @@ namespace ShopApp.Controllers
                 return false;
             if(!DeleteFlag && (
                 request.Product.Name == null ||
-                request.Product.Category == null))
+                request.Product.Category == null ||
+                request.Product.Description == null))
                 return false;
+
                 return true;
         }
     }

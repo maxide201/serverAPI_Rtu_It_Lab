@@ -26,7 +26,7 @@ namespace ShopApp.Database
         {
             using (IDbConnection db = new MySqlConnection(connectionString))
             {
-                var sqlQuery = "INSERT INTO Products (ShopId, Name, Category, Cost, Count) VALUES(@ShopId, @Name, @Category, @Cost, @Count); SELECT LAST_INSERT_ID()";
+                var sqlQuery = "INSERT INTO Products (ShopId, Name, Category, Cost, Count, Description) VALUES(@ShopId, @Name, @Category, @Cost, @Count, @Description); SELECT LAST_INSERT_ID()";
                 uint id = db.Query<uint>(sqlQuery, product).FirstOrDefault();
 
                 return Get(id);
@@ -46,7 +46,7 @@ namespace ShopApp.Database
         {
             using (IDbConnection db = new MySqlConnection(connectionString))
             {
-                var sqlQuery = "UPDATE Products SET ShopId=@ShopId, Name=@Name, Category=@Category, Cost=@Cost, Count=@Count WHERE Id = @Id";
+                var sqlQuery = "UPDATE Products SET ShopId=@ShopId, Name=@Name, Category=@Category, Cost=@Cost, Count=@Count, Description=@Description WHERE Id = @Id";
                 db.Execute(sqlQuery, product);
 
                 return Get(product.Id);

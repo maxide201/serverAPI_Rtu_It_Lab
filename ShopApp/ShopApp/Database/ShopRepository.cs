@@ -22,7 +22,6 @@ namespace ShopApp.Database
 
         public Shop Add(Shop shop)
         {
-            //if root@password
             using (IDbConnection db = new MySqlConnection(connectionString))
             {
                 var sqlQuery = "INSERT INTO Shops (Name, Address, PhoneNumber, Password) VALUES(@Name, @Address, @PhoneNumber, @Password); SELECT LAST_INSERT_ID()";

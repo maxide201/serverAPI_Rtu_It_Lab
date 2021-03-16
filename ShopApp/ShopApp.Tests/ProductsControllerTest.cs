@@ -21,7 +21,8 @@ namespace ShopApp.Tests
                 Category = "Sport",
                 Cost = 3.2,
                 Count = 3,
-                Name = "aaaa"
+                Name = "aaaa",
+                Description = "AAAAA"
             };
             ShopAdminProductRequest request = new ShopAdminProductRequest();
             request.Password = "password";

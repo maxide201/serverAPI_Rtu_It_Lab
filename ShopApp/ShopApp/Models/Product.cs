@@ -8,5 +8,6 @@
         public string Category { get; set; }
         public double Cost { get; set; }
         public uint Count { get; set; }
+        public string Description { get; set; }
     }
 }

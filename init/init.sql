@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS Products (
 	ShopId INT UNSIGNED,
 	Name varchar(50),
 	Category varchar(50),
+	Description varchar(50),
 	Count REAL,
 	Cost REAL,
 	FOREIGN KEY (ShopId) REFERENCES Shops (Id) ON DELETE CASCADE
