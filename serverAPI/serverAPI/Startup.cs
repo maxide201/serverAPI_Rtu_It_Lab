@@ -23,6 +23,10 @@ namespace serverAPI
         {
             string connectionString = Configuration.GetConnectionString("Database");
             services.AddTransient<IUserRepository, UserRepository>(provider => new UserRepository(connectionString));
+            services.AddTransient<IShopRepository, ShopRepository>(provider => new ShopRepository(connectionString));
+            services.AddTransient<IProductRepository, ProductRepository>(provider => new ProductRepository(connectionString));
+            services.AddTransient<IPurchaseRepository, PurchaseRepository>(provider => new PurchaseRepository(connectionString));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

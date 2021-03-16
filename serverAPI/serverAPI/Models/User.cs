@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace serverAPI.Models
+﻿namespace serverAPI.Models
 {
     public class User
     {
-        [Key]
         public uint Id { get; set; }
         public string Name { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using serverAPI.Models;
 using serverAPI.Database;
+using System;
+using System.Collections.Generic;
 
 namespace serverAPI.Controllers
 {
@@ -8,11 +10,11 @@ namespace serverAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        IUserRepository db;
+        IUserRepository _db;
 
         public UsersController(IUserRepository db)
         {
-            this.db = db;
+            _db = db;
         }
 
         /// <summary>
@@ -20,18 +22,20 @@ namespace serverAPI.Controllers
         /// </summary>
         /// <response code="200">Returns user</response>
         /// <response code="404">If the user doesn't exist</response>
-        [HttpGet("{id}")]
-        public JsonResult GetUser(uint id)
+        [HttpGet]
+        public JsonResult GetPurchases(User user)
         {
-            User user = db.Get(id);
+            if (!isUserValid(user))
+                return new JsonResult(BadRequest());
 
-            if (user == null)
-                return new JsonResult(NotFound());
+            if (!_db.isUserPasswordRight(user))
+                return new JsonResult(StatusCode(403));
 
-            return new JsonResult(Ok(user));
+            List<PurchaseDTO> purchases = _db.GetPurchases(user.Id);
+
+            return new JsonResult(Ok(purchases));
 
         }
-
         /// <summary>
         /// Creates a new user.
         /// </summary>
@@ -56,53 +60,11 @@ namespace serverAPI.Controllers
         [HttpPost]
         public JsonResult PostUser(User user)
         {
-            if (isUserInvalid(user))
+            if (!isUserValid(user))
                 return new JsonResult(BadRequest());
 
-            user = db.Add(user);
+            user = _db.Add(user);
 
-            return new JsonResult(Ok(user));
-        }
-
-        /// <summary>
-        /// Update purchases list of existing user.
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     PUT /Users
-        ///     {
-        ///        "id": 1
-        ///        "purchases": [
-        ///             {
-        ///                 "id": 1,
-        ///                 "userId": 1,
-        ///                 "name": "apple",
-        ///                 "purchaseDate": "2000-01-01T01:01:01",
-        ///                 "cost: 1000
-        ///             },
-        ///             {
-        ///                 "name": "banana",
-        ///                 "purchaseDate": "2000-01-01T01:01:02",
-        ///                 "cost: 200
-        ///             }
-        ///         ]
-        ///     }
-        ///
-        /// </remarks>
-        /// <returns>Updated user</returns>
-        /// <response code="200">Returns updated user</response>
-        /// <response code="400">If the user is null or invalid</response>
-        /// <response code="404">If the user doesn't exist</response>
-        [HttpPut]
-        public JsonResult PutUser(User user)
-        {
-            if (isUserInvalid(user, idTestFlag: true))
-                return new JsonResult(BadRequest());
-            if (db.Get(user.Id) == null)
-                return new JsonResult(NotFound());
-
-            user = db.Update(user);
             return new JsonResult(Ok(user));
         }
 
@@ -111,34 +73,32 @@ namespace serverAPI.Controllers
         /// </summary>
         /// <response code="200">Returns deleted user</response>
         /// <response code="404">If the user doesn't exist</response>
-        [HttpDelete("{id}")]
-        public JsonResult DeleteUser(uint id)
+        [HttpDelete]
+        public JsonResult DeleteUser(User user)
         {
-            User user = db.Get(id);
+            if (!isUserValid(user, idTestFlag:true))
+                return new JsonResult(BadRequest());
 
-            if (user == null)
-                return new JsonResult(NotFound());
+            if (!_db.isUserPasswordRight(user))
+                return new JsonResult(StatusCode(403));
 
-            db.Delete(id);
+            _db.Delete(user.Id);
             return new JsonResult(Ok(user));
         }
 
+
         [ApiExplorerSettings(IgnoreApi = true)]
-        public virtual bool isUserInvalid(User user, bool idTestFlag = false)
+        public virtual bool isUserValid(User user, bool idTestFlag = false)
         {
-            if (user == null || user.Purchases == null)
-                return true;
+            if (user == null ||
+                user.Name == null||
+                user.Password == null)
+                return false;
+
             if (idTestFlag && user.Id == 0)
-                return true;
-            foreach (var purchase in user.Purchases)
-            {
-                if (purchase == null)
-                    return true;
-                if (purchase.Name == null ||
-                    purchase.PurchaseDate == System.DateTime.MinValue)
-                    return true;
-            }
-            return false;
+                return false;
+
+            return true;
         }
     }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace serverAPI.Models
 {
-    public class Purchase
+    public class PurchaseDTO
     {
-        [Key]
         public uint Id { get; set; }
-        public uint CheckId { get; set; }
         public uint Count { get; set; }
         public double Cost { get; set; }
         public string Name { get; set; }
