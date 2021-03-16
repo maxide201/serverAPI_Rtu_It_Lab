@@ -6,10 +6,10 @@ using Xunit;
 
 namespace UserApp.Tests
 {
-    public class UserControllerTests
+    public class UserControllerTest
     {
         [Fact]
-        public void isUserValidReturnTrue()
+        public void isUserValidReturnsTrue()
         {
             var mock = new Mock<IUserRepository>();
             UsersController controller = new UsersController(mock.Object);
@@ -21,7 +21,7 @@ namespace UserApp.Tests
         }
 
         [Fact]
-        public void isUserValidReturnFalse()
+        public void isUserValidReturnsFalse()
         {
             var mock = new Mock<IUserRepository>();
             UsersController controller = new UsersController(mock.Object);
@@ -33,7 +33,7 @@ namespace UserApp.Tests
         }
 
         [Fact]
-        public void getPurchasesReturnCode403()
+        public void getPurchasesReturnsCode403()
         {
             var mock = new Mock<IUserRepository>();
             mock.Setup(f => f.isUserPasswordRight(new User())).Returns(false);
@@ -47,7 +47,7 @@ namespace UserApp.Tests
         }
 
         [Fact]
-        public void postUserReturnCode400()
+        public void postUserReturnsCode400()
         {
             var mock = new Mock<IUserRepository>();
             UsersController controller = new UsersController(mock.Object);
@@ -60,7 +60,7 @@ namespace UserApp.Tests
         }
 
         [Fact]
-        public void deleteUserReturnCode400()
+        public void deleteUserReturnsCode400()
         {
             var mock = new Mock<IUserRepository>();
             UsersController controller = new UsersController(mock.Object);

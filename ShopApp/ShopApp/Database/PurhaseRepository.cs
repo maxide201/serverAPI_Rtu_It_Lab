@@ -29,7 +29,6 @@ namespace ShopApp.Database
 
                 return db.ExecuteScalar<bool>(sqlQueryFindUser, request) &&
                        db.ExecuteScalar<bool>(sqlQueryFindShop, request);
-
             }
         }
 
@@ -53,7 +52,7 @@ namespace ShopApp.Database
                         ((int)productInShop.Count - (int)purchasedProduct.Count) < 0)
                         return null;
 
-                    // подтягиваем имена и стоимость (данные подманить не получится)
+                    // подтягиваем имена и стоимость (данные подменить не получится)
                     purchasedProduct.Name = productInShop.Name;
                     purchasedProduct.Cost = productInShop.Cost;
                     // вытягиваем категорию, если пользователь не задал

@@ -115,7 +115,7 @@ namespace ShopApp.Controllers
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
-        private bool isSuperAdmin(string password)
+        public virtual bool isSuperAdmin(string password)
         {
             return password == _configuration.GetValue<string>("RootPassword");
         }

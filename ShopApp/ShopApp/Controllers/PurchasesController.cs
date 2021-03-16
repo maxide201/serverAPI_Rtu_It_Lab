@@ -47,7 +47,7 @@ namespace ShopApp.Controllers
         [HttpPost]
         public JsonResult MakePurchase(PurchaseRequest request)
         {
-            if (!isPurchaseRequestRight(request))
+            if (!isPurchaseRequestValid(request))
                 return _Response.BadRequest();
 
             if (!_db.isUserAndShopExists(request))
@@ -93,7 +93,7 @@ namespace ShopApp.Controllers
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
-        private bool isShopRequestValid(ShopAdminRequest request)
+        public virtual bool isShopRequestValid(ShopAdminRequest request)
         {
             if (request == null ||
                 request.Password == null)
@@ -103,7 +103,7 @@ namespace ShopApp.Controllers
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
-        private bool isPurchaseRequestRight(PurchaseRequest request)
+        public virtual bool isPurchaseRequestValid(PurchaseRequest request)
         {
             if (request == null ||
                 request.UserId == 0 ||

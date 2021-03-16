@@ -148,7 +148,7 @@ namespace ShopApp.Controllers
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
-        private bool isRequestValid(ShopAdminProductRequest request, bool DeleteFlag = false)
+        public virtual bool isRequestValid(ShopAdminProductRequest request, bool DeleteFlag = false)
         {
             if (request == null ||
                 request.Password == null ||
