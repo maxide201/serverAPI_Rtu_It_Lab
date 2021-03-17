@@ -49,7 +49,8 @@ namespace ShopApp.Database
 
                     // если продукта нет или мы хотим купить больше, чем есть в наличии, то return 
                     if (productInShop == null ||
-                        ((int)productInShop.Count - (int)purchasedProduct.Count) < 0)
+                        ((int)productInShop.Count - (int)purchasedProduct.Count) < 0 ||
+                        (int)purchasedProduct.Count == 0)
                         return null;
 
                     // подтягиваем имена и стоимость (данные подменить не получится)
